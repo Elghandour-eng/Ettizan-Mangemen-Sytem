@@ -152,7 +152,7 @@
                                         </div>
                                         </div> --}}
                                         <div class="card-body">
-                                            <p style="font-size: 33.205px; font-style: normal; font-weight: 700; line-height: 120%;">{{__('messages.admin_dashboard.Total_Transactions')}}</p>
+                                            <p style="font-size: 30px; font-style: normal; font-weight: 500; line-height: 120%;">{{__('messages.admin_dashboard.Total_Transactions')}}</p>
                                             <h4 class="mb-0">{{ $data['totaltransactions']->sum('amount') }} KD</h4>
 
                                             <hr>
@@ -233,7 +233,7 @@
                                 <div class="card-header border-bottom bg-transparent">
                                 <div class="d-flex align-items-center">
                                     <div>
-                                        <h6 class="mb-0" style="font-size: 33.205px; font-style: normal; font-weight: 700; line-height: 120%;">{{__('messages.admin_dashboard.Latest_Patients_Added')}}</h6>
+                                        <h6 class="mb-0" style="font-size: 26px; font-style: normal; font-weight: 500; line-height: 120%;">{{__('messages.admin_dashboard.Latest_Patients_Added')}}</h6>
                                     </div>
                                     <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
                                     </div>
@@ -295,7 +295,7 @@
                                 <div class="card-header border-bottom bg-transparent">
                                  <div class="d-flex align-items-center">
                                      <div>
-                                         <h6 class="mb-0" style="font-size: 33.205px; font-style: normal; font-weight: 700; line-height: 120%;">{{__('messages.admin_dashboard.Latest_Doctors_Added')}}</h6>
+                                         <h6 class="mb-0" style="font-size: 26px; font-style: normal; font-weight: 500; line-height: 120%;">{{__('messages.admin_dashboard.Latest_Doctors_Added')}}</h6>
                                      </div>
                                      <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
                                      </div>
