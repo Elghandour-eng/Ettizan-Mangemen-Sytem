@@ -69,16 +69,38 @@
                     </div>
                     <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
                           data-placement="top" data-bs-original-title="{{__('messages.user.edit_profile')}}">
-                        <label> 
-                            <i class="fa-solid fa-pen" id="profileImageIcon"></i> 
-                            <input type="file" id="profilePicture" name="profile" class="image-upload d-none profile-validation" accept="image/*" /> 
-                        </label> 
+                        <label>
+                            <i class="fa-solid fa-pen" id="profileImageIcon"></i>
+                            <input type="file" id="profilePicture" name="profile" class="image-upload d-none profile-validation" accept="image/*" />
+                        </label>
                     </span>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!----------------------------  Services  ---------------------------->
+<div class="fw-bolder fs-3 rotate collapsible mb-7">
+    {{__('messages.doctor.service_cost')}} :
+    <span class="text-danger  font-weight-bold fs-6 fw-normal">@lang('messages.leave it blank')</span>
+</div>
+
+@if(isset($services))
+
+    @foreach($services as $service)
+        <div class="row gx-10 mb-5">
+            <div class="col-md-6 mb-5">
+                {{ Form::label("services_{$service->id}",$service->name ,['class' => 'form-label']) }}
+            </div>
+            <div class="col-md-6 mb-5">
+                <input id="services_{{$service->id}}" type="number" name="services[{{$service->id}}]" value="{{$doctor->getServiceCost($service->id)}}" class="form-control" min="1">
+            </div>
+
+        </div>
+    @endforeach
+
+@endif
+<!----------------------------  Services  ---------------------------->
 <div class="col-md-6 mb-5">
     <label class="form-label">{{__('messages.doctor.status')}}:</label>
     <div class="col-lg-8">

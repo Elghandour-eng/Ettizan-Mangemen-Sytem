@@ -58,7 +58,7 @@ class DoctorSession extends Model
         'session_meeting_time' => 'integer',
         'session_gap' => 'string',
     ];
-    
+
     const MALE = 1;
 
     const FEMALE = 2;
@@ -69,6 +69,7 @@ class DoctorSession extends Model
     ];
 
     const GAPS = [
+        '0' => '0 minutes',
         '5' => '5 minutes',
         '10' => '10 minutes',
         '15' => '15 minutes',

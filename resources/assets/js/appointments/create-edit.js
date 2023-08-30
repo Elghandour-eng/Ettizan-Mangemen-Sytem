@@ -17,7 +17,7 @@ function loadAppointmentCreateEditData () {
     let lang = $('.currentLanguage').val()
     $('#appointmentDate').flatpickr({
         "locale": lang,
-        minDate: new Date(),
+        // minDate: new Date(),
         disableMobile: true,
     });
 
@@ -28,6 +28,7 @@ listenChange('#appointmentDate', function () {
     selectedDate = $(this).val();
     let userRole = $('#patientRole').val();
     let appointmentIsEdit = $('#appointmentIsEdit').val();
+    let sessionPeriod = $('#session_period').val();
     $('.appointment-slot-data').html('');
     let url = !isEmpty(userRole)
         ? route('patients.doctor-session-time')
@@ -39,6 +40,7 @@ listenChange('#appointmentDate', function () {
             'adminAppointmentDoctorId': $('#adminAppointmentDoctorId').val(),
             'date': selectedDate,
             'timezone_offset_minutes': timezoneOffsetMinutes,
+            'session_period': sessionPeriod,
         },
         success: function (result) {
             if (result.success) {
@@ -138,6 +140,7 @@ listenChange('#adminAppointmentDoctorId', function () {
 });
 
 listenChange('#appointmentServiceId', function () {
+    let doctorId =$('#adminAppointmentDoctorId').val()
     let url = !isEmpty(userRole) ? route('patients.get-charge') : route(
         'get-charge');
 
@@ -146,6 +149,7 @@ listenChange('#appointmentServiceId', function () {
         type: 'GET',
         data: {
             'chargeId': $(this).val(),
+            'doctor_id': doctorId
         },
         success: function (result) {
             if (result.success) {
@@ -153,9 +157,9 @@ listenChange('#appointmentServiceId', function () {
                 $('#addFees').val('');
                 $('#payableAmount').val('');
                 if (result.data) {
-                    $('#chargeId').val(result.data.charges);
-                    $('#payableAmount').val(result.data.charges);
-                    charge = result.data.charges;
+                     charge = result.data.pivot?.cost ? result.data.pivot?.cost :result.data.charges;
+                    $('#chargeId').val( charge);
+                    $('#payableAmount').val(charge);
                 }
             }
         },

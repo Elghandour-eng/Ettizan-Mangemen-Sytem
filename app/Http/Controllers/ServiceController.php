@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateServicesRequest;
 use App\Http\Requests\UpdateServicesRequest;
 use App\Models\Appointment;
+use App\Models\Doctor;
 use App\Models\Service;
 use App\Repositories\ServicesRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -129,7 +130,13 @@ class ServiceController extends AppBaseController
     public function getCharge(Request $request)
     {
         $chargeId = $request->chargeId;
-        $charge = Service::find($chargeId);
+
+        if($request->has('doctor_id')){
+            $charge = Doctor::with('services')->select('id')
+                ->find($request->doctor_id)->services()->wherePivot('service_id', $chargeId)->first();
+        }else{
+            $charge = Service::find($chargeId);
+        }
 
         return $this->sendResponse($charge, __('messages.flash.retrieve'));
     }

@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center">
-    @if(empty($row->user->email_verified_at))
+    @if(empty($row->user->email_verified_at) && $row->user->email)
         <a href="javascript:void(0)" data-id="{{ $row->user->id }}"
            class="btn px-2 text-primary fs-2 patient-email-verification"  data-bs-toggle="tooltip"
            data-bs-original-title="{{__('messages.resend_email_verification')}}">

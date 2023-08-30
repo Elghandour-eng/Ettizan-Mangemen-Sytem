@@ -110,7 +110,7 @@ class Service extends Model implements HasMedia
      */
     public function serviceDoctors(): BelongsToMany
     {
-        return $this->belongsToMany(Doctor::class, 'service_doctor', 'service_id', 'doctor_id');
+        return $this->belongsToMany(Doctor::class, 'service_doctor', 'service_id', 'doctor_id')->withPivot('cost');
     }
 
     /**

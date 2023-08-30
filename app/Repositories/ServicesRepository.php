@@ -112,4 +112,7 @@ class ServicesRepository extends AppBaseController
 
         return $data;
     }
+    public function getServicesForSelect(){
+        return Service::whereStatus(Service::ACTIVE)->select(['id', 'name'])->get();
+    }
 }

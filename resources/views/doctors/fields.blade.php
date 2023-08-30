@@ -21,7 +21,7 @@
         <div class="mb-5">
             {{ Form::label('Contact',__('messages.user.contact_number').':' ,['class' => 'form-label']) }}
             <!--{{ Form::tel('contact', null,['class' => 'form-control','placeholder' => __('messages.user.contact_number'),'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}-->
-            
+
             {{ Form::text('contact', null,['class' => 'form-control','placeholder' => __('messages.user.contact_number')]) }}
             <!--{{ Form::hidden('region_code',null,['id'=>'prefix_code']) }}-->
             <!--<span id="valid-msg" class="text-success d-none fw-400 fs-small mt-2">{{ __('messages.valid_number') }}</span>-->
@@ -112,10 +112,10 @@
                         </div>
                         <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
                               data-placement="top" data-bs-original-title="{{ __('messages.user.edit_profile') }}">
-                        <label> 
-                            <i class="fa-solid fa-pen" id="profileImageIcon"></i> 
-                            <input type="file" id="profilePicture" name="profile" class="image-upload d-none profile-validation" accept="image/*" /> 
-                        </label> 
+                        <label>
+                            <i class="fa-solid fa-pen" id="profileImageIcon"></i>
+                            <input type="file" id="profilePicture" name="profile" class="image-upload d-none profile-validation" accept="image/*" />
+                        </label>
                     </span>
                     </div>
                 </div>
@@ -132,7 +132,30 @@
         </div>
     </div>
 </div>
-<div class="fw-bolder fs-3 rotate collapsible mb-7">
+    <!----------------------------  Services  ---------------------------->
+    <div class="fw-bolder fs-3 rotate collapsible mb-7">
+        {{__('messages.doctor.service_cost')}} :
+        <span class="text-danger  font-weight-bold fs-6 fw-normal">@lang('messages.leave it blank')</span>
+    </div>
+
+    @if(isset($services))
+
+        @foreach($services as $service)
+            <div class="row gx-10 mb-5">
+                <div class="col-md-6 mb-5">
+                    {{ Form::label("services_{$service->id}",$service->name ,['class' => 'form-label']) }}
+                </div>
+                <div class="col-md-6 mb-5">
+                    <input id="services_{{$service->id}}" type="number" name="services[{{$service->id}}]" value="{{old('services.'.$service->id)}}" class="form-control" min="1">
+                </div>
+
+            </div>
+        @endforeach
+
+    @endif
+    <!----------------------------  Services  ---------------------------->
+
+    <div class="fw-bolder fs-3 rotate collapsible mb-7">
     {{__('messages.doctor.address_information')}}
 </div>
 <div class="row gx-10 mb-5">

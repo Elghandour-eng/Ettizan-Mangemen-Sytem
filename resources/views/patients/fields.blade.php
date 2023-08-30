@@ -12,29 +12,29 @@
         {{ Form::text('patient_unique_id',isset($data['patientUniqueId']) ? $data['patientUniqueId'] : null,['class' => 'form-control','required','maxLength' => '8','readonly']) }}
     </div>
     <div class="col-md-6 mb-5">
-        {{ Form::label('email',__('messages.patient.email').':' ,['class' => 'form-label required']) }}
-        {{ Form::email('email',!empty($patient->user) ? $patient->user->email : null,['class' => 'form-control','placeholder' => __('messages.patient.email'),'required']) }}
+        {{ Form::label('email',__('messages.patient.email').':' ,['class' => 'form-label ']) }}
+        {{ Form::email('email',!empty($patient->user) ? $patient->user->email : null,['class' => 'form-control','placeholder' => __('messages.patient.email')]) }}
     </div>
     @if(empty($patient))
         <div class="col-md-6 mb-5">
             <div class="mb-1">
-                {{ Form::label('password',__('messages.patient.password').':' ,['class' => 'form-label required']) }}
+                {{ Form::label('password',__('messages.patient.password').':' ,['class' => 'form-label ']) }}
                 <span data-bs-toggle="tooltip" title="{{ __('messages.flash.user_8_or') }}">
                 <i class="fa fa-question-circle"></i></span>
                 <div class="mb-3 position-relative">
-                    {{Form::password('password',['class' => 'form-control','placeholder' => __('messages.patient.password'),'autocomplete' => 'off','required','aria-label'=>"Password",'data-toggle'=>"password"])}}
+                    {{Form::password('password',['class' => 'form-control','placeholder' => __('messages.patient.password'),'autocomplete' => 'off','aria-label'=>"Password",'data-toggle'=>"password"])}}
                     <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4 input-icon input-password-hide cursor-pointer text-gray-600"> <i class="bi bi-eye-slash-fill"></i> </span>
                 </div>
             </div>
         </div>
         <div class="col-md-6 mb-5">
                 <div class="mb-1">
-                    {{ Form::label('confirmPassword',__('messages.patient.confirm_password').':' ,['class' => 'form-label required']) }}
+                    {{ Form::label('confirmPassword',__('messages.patient.confirm_password').':' ,['class' => 'form-label ']) }}
                     <span data-bs-toggle="tooltip"
                           title="{{ __('messages.flash.user_8_or') }}">
                     <i class="fa fa-question-circle"></i></span>
                     <div class="mb-3 position-relative">
-                        {{Form::password('password_confirmation',['class' => 'form-control','placeholder' => __('messages.user.confirm_password'),'autocomplete' => 'off','required','aria-label'=>"Password",'data-toggle'=>"password"])}}
+                        {{Form::password('password_confirmation',['class' => 'form-control','placeholder' => __('messages.user.confirm_password'),'autocomplete' => 'off','aria-label'=>"Password",'data-toggle'=>"password"])}}
                         <span class="position-absolute d-flex align-items-center top-0 bottom-0 end-0 me-4 input-icon input-password-hide cursor-pointer text-gray-600"> <i class="bi bi-eye-slash-fill"></i> </span>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
     @endif
     <div class="col-md-6 mb-5">
         {{ Form::label('contact', __('messages.patient.contact_no').':', ['class' => 'form-label']) }}
-        {{ Form::tel('contact', !empty($patient->user) ? '+'.$patient->user->region_code.$patient->user->contact : null, ['class' => 'form-control', 
+        {{ Form::tel('contact', !empty($patient->user) ? '+'.$patient->user->region_code.$patient->user->contact : null, ['class' => 'form-control',
             'placeholder' => __('messages.patient.contact_no'),'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}
         {{ Form::hidden('region_code',!empty($patient->user) ? $patient->user->region_code : null,['id'=>'prefix_code']) }}
         <span id="valid-msg" class="text-success d-none fw-400 fs-small mt-2">{{ __('messages.valid_number') }}</span>
@@ -80,10 +80,10 @@
                     </div>
                     <span class="picker-edit rounded-circle text-gray-500 fs-small" data-bs-toggle="tooltip"
                           data-placement="top" data-bs-original-title="{{ __('messages.user.edit_profile') }}">
-                        <label> 
-                            <i class="fa-solid fa-pen" id="profileImageIcon"></i> 
-                            <input type="file" name="profile" id="profilePicture" class="image-upload d-none profile-validation" accept="image/*" /> 
-                        </label> 
+                        <label>
+                            <i class="fa-solid fa-pen" id="profileImageIcon"></i>
+                            <input type="file" name="profile" id="profilePicture" class="image-upload d-none profile-validation" accept="image/*" />
+                        </label>
                     </span>
                 </div>
             </div>

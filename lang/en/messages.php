@@ -69,7 +69,7 @@ return [
     'too_long' => 'Too long',
     'note' => 'Note: You must need to set your timezone before integrating Google Calendar.',
     'no_data_available' => 'No data available in table',
-
+    'leave it blank' => 'Leave it empty if you don\'t want to set it',
     'web' => [
         'enter_your_email' => 'Enter Your Email',
         'emergency_help' => 'Emergency Help',
@@ -458,6 +458,9 @@ return [
         'select_year' => 'Select Year',
         'doctor_holiday' => 'Doctor Holidays',
         'select_date' => 'Select Date',
+        'service_cost' => 'Services Cost',
+        'session_period'=>'Session Period',
+
     ],
 
     'service' => [
@@ -535,6 +538,8 @@ return [
         'payment_method' => 'Payment Method',
         'cancel_appointment' => 'Cancel Appointment',
         'session_created_successfully' => 'session created successfully',
+        'session_period'=>'Session Period',
+
     ],
 
     'doctor_appointment' => [
@@ -659,6 +664,8 @@ return [
         'paid' => 'Paid',
         'pending' => 'Pending',
         'payment_accepted_by' => 'Payment Accepted By',
+        'export excel'=>'Export Excel',
+
     ],
 
     'notification' => [

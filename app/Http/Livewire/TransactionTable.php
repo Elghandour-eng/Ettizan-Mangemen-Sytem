@@ -2,13 +2,18 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\TransactionsExport;
 use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Builder;
+use Maatwebsite\Excel\Facades\Excel;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class TransactionTable extends LivewireTableComponent
 {
     protected $model = Transaction::class;
+    public bool $showButtonOnHeader = true;
+
+    public string $buttonComponent = 'transactions.components.export_button';
     protected $listeners = ['refresh' => '$refresh','resetPage'];
 
     public function configure(): void
@@ -64,5 +69,11 @@ class TransactionTable extends LivewireTableComponent
                 ->sortable()->searchable(),
             Column::make(__('messages.common.action'), 'id')->view('transactions.components.action'),
         ];
+    }
+
+    public function exportExcel(){
+        if(getLogInUser()->hasRole('clinic_admin')){
+            return Excel::download(new TransactionsExport(), 'transactions.xlsx' );
+        }
     }
 }
