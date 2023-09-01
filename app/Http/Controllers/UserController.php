@@ -14,6 +14,7 @@ use App\Models\DoctorSession;
 use App\Models\Specialization;
 use App\Models\User;
 use App\Models\Visit;
+use App\Repositories\ServicesRepository;
 use App\Repositories\UserRepository;
 use Carbon\Carbon;
 use DB;
@@ -35,17 +36,21 @@ class UserController extends AppBaseController
 {
     /**
      * @var UserRepository
+     * @var ServicesRepository
      */
     public $userRepo;
+    public $serviceRpo;
 
     /**
      * UserController constructor.
      *
      * @param  UserRepository  $userRepository
+     * @param  ServicesRepository  $userRepository
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository , ServicesRepository $servicesRepository)
     {
         $this->userRepo = $userRepository;
+        $this->serviceRpo = $servicesRepository;
     }
 
     /**
@@ -78,9 +83,10 @@ class UserController extends AppBaseController
     {
         $specializations = Specialization::pluck('name', 'id')->toArray();
         $country = $this->userRepo->getCountries();
+        $services = $this->serviceRpo->getServicesForSelect();
         $bloodGroup = Doctor::BLOOD_GROUP_ARRAY;
 
-        return view('doctors.create', compact('specializations', 'country', 'bloodGroup'));
+        return view('doctors.create', compact('specializations', 'services','country', 'bloodGroup'));
     }
 
     /**
@@ -127,10 +133,13 @@ class UserController extends AppBaseController
      */
     public function edit(Doctor $doctor)
     {
+        $doctor->load('services');
         $user = $doctor->user()->first();
         $qualifications = $user->qualifications()->get();
         $data = $this->userRepo->getSpecializationsData($doctor);
         $bloodGroup = Doctor::BLOOD_GROUP_ARRAY;
+        $services = $this->serviceRpo->getServicesForSelect();
+
         $countries = $this->userRepo->getCountries();
         $state = $cities = null;
         $years = [];
@@ -146,7 +155,7 @@ class UserController extends AppBaseController
         }
 
         return view('doctors.edit',
-            compact('user', 'qualifications', 'data', 'doctor', 'countries', 'state', 'cities', 'years', 'bloodGroup'));
+            compact('user', 'qualifications','services', 'data', 'doctor', 'countries', 'state', 'cities', 'years', 'bloodGroup'));
     }
 
     /**

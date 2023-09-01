@@ -93,7 +93,7 @@ class AppointmentRepository extends BaseRepository
             $service = Service::whereId($input['service_id'])->first();
             $input['service'] = $service->name;
 
-            if ($patient->user->email_notification) {
+            if ($patient->user->email_notification && $patient->user->email) {
                 Mail::to($patient->user->email)->send(new PatientAppointmentBookMail($input));
             }
 

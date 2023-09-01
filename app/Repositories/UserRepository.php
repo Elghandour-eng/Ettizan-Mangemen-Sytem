@@ -75,6 +75,11 @@ class UserRepository extends BaseRepository
             $doctor->address()->create($addressInputArray);
             $createDoctor = $doctor->doctor()->create($doctorArray);
             $createDoctor->specializations()->sync($specialization);
+            foreach ($input['services'] as $service_id => $cost){
+                if($cost) {
+                    $createDoctor->services()->attach($service_id, ['cost' => $cost]);
+                }
+            }
             if (isset($input['profile']) && ! empty('profile')) {
                 $doctor->addMedia($input['profile'])->toMediaCollection(User::PROFILE, config('app.media_disc'));
             }
@@ -101,6 +106,7 @@ class UserRepository extends BaseRepository
         $specialization = $input['specializations'];
         try {
             DB::beginTransaction();
+            $doctor->load('services');
             $input['email'] = setEmailLowerCase($input['email']);
             $input['status'] = (isset($input['status'])) ? 1 : 0;
             $input['type'] = User::DOCTOR;
@@ -126,7 +132,19 @@ class UserRepository extends BaseRepository
                     }
                 }
             }
-
+            foreach ($input['services'] as $service_id => $cost){
+                $doctorService = $doctor->services()->whereServiceId($service_id)->first();
+                if($doctorService) {
+                    if( is_null($cost) ){
+                        $doctor->services()->detach($service_id);
+                    }else{
+                        $doctorService->pivot->cost = $cost;
+                        $doctorService->pivot->save();
+                    }
+                }elseif($cost){
+                    $doctor->services()->attach($service_id, ['cost' => $cost]);
+                }
+            }
             if (isset($input['profile']) && ! empty('profile')) {
                 $doctor->user->clearMediaCollection(User::PROFILE);
                 $doctor->user->media()->delete();

@@ -559,6 +559,8 @@ class User extends Authenticatable implements HasMedia
         'status' => 'nullable',
         'postal_code' => 'nullable',
         'profile' => 'nullable|mimes:jpeg,png,jpg|max:2000',
+        'services'=>'nullable|array',
+        'services.*'=>'nullable|numeric|min:1',
     ];
 
     /**

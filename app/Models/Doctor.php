@@ -141,6 +141,17 @@ class Doctor extends Model
     {
         return $this->hasMany(Appointment::class);
     }
+    /**
+     * @return HasMany
+     */
+    public function services(): BelongsToMany
+    {
+        return $this->belongsToMany(Service::class, 'service_doctor', 'doctor_id','service_id')->withPivot('cost');
+    }
+
+    public function getServiceCost($service_id){
+        return $this->services()->whereServiceId($service_id)->select(['cost'])->first()->pivot?->cost ?? '';
+    }
 
     /**
      * @return HasMany

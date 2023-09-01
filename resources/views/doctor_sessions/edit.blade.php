@@ -27,7 +27,7 @@
                 </div>
             </div>
             {{ Form::hidden('is_edit', true,['id' => 'doctorSessionIsEdit']) }}
-            {{ Form::hidden('get_slot_url', getLogInUser()->hasRole('doctor') ? url('doctors/get-slot-by-gap') : route('get.slot.by.gap'),['id' => 'getSlotByGapUrl']) }}
+            {{ Form::hidden('get_slot_url', getLogInUser()->hasRole('doctor') ? url('doctors/') : route('get.slot.by.gap'),['id' => 'getSlotByGapUrl']) }}
             <div class="card">
                 <div class="card-body p-12">
                     @if(getLogInUser()->hasRole('doctor'))

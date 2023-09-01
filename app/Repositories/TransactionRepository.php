@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Transaction;
+use Illuminate\Http\Request;
 
 /**
  * Class RoleRepository
@@ -46,5 +47,9 @@ class TransactionRepository extends BaseRepository
             'acceptedPaymentUser')->whereId($id)->first();
 
         return $transaction;
+    }
+
+    public function exportExcel(){
+
     }
 }
