@@ -19,11 +19,13 @@ class TransactionsExport implements FromCollection, WithHeadings, WithStyles,Wit
 {
     public function collection()
     {
-        return Transaction::with('user.patient')->get();
+        return Transaction::with('user.patient','appointment.doctor.user')->get();
     }
     public function map($transaction): array
     {
         return [
+            $transaction->appointment?->doctor?->user?->full_name ??'',
+            '',
             $transaction->user?->full_name ??'',
             '',
 
@@ -41,10 +43,10 @@ class TransactionsExport implements FromCollection, WithHeadings, WithStyles,Wit
     public function headings(): array
     {
         return [
+            'Doctor Name',
+            '',
             'Patient Name',
             '',
-
-
             'Date',
             '',
 

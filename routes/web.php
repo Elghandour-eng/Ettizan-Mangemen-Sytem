@@ -261,6 +261,7 @@ Route::prefix('admin')->middleware('auth', 'xss', 'checkUserStatus', 'checkImper
             [AppointmentController::class, 'changePaymentStatus'])->name('change-payment-status');
         Route::get('transactions', [TransactionController::class, 'index'])->name('transactions');
         Route::get('transactions/{transaction}', [TransactionController::class, 'show'])->name('transactions.show');
+        Route::get('export/transactions/excel', [TransactionController::class, 'exportExcel'])->name('transactions.export-excel');
     });
     Route::get('admin-appointments-calendar',
         [AppointmentController::class, 'appointmentCalendar'])->name('appointments.calendar');

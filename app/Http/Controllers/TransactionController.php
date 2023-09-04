@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TransactionsExport;
 use App\Models\Appointment;
 use App\Models\Notification;
 use App\Models\Patient;
@@ -14,6 +15,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransactionController extends AppBaseController
 {
@@ -104,5 +106,11 @@ class TransactionController extends AppBaseController
         ]);
 
         return response()->json(['success' => true, 'message' => __('messages.flash.status_update')]);
+    }
+    public function exportExcel(){
+        if(getLogInUser()->hasRole('clinic_admin')){
+            return Excel::download(new TransactionsExport(), 'transactions.xlsx' );
+        }
+        return back();
     }
 }
