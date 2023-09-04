@@ -344,7 +344,7 @@ class AppointmentRepository extends BaseRepository
             $data[$key]['status'] = $appointment->status;
             $data[$key]['amount'] = $appointment->payable_amount;
             $data[$key]['uId'] = $appointment->appointment_unique_id;
-            $data[$key]['service'] = $appointment->services->name;
+//            $data[$key]['service'] = $appointment->services->name;
             $data[$key]['end'] = $end->toDateTimeString();
             $data[$key]['color'] = '#FFF';
             $data[$key]['className'] = [getStatusClassName($appointment->status), 'text-white'];
