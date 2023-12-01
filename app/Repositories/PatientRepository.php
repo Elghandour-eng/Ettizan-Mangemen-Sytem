@@ -66,11 +66,14 @@ class PatientRepository extends BaseRepository
             $addressInputArray = Arr::only($input,
                 ['address1', 'address2', 'city_id', 'state_id', 'country_id', 'postal_code']);
             $input['patient_unique_id'] = Str::upper($input['patient_unique_id']);
-            $input['email'] = setEmailLowerCase($input['email']);
+
+            // $input['email'] = setEmailLowerCase('amr3@gmail.com');
+            $input['email'] = "user{$input['patient_unique_id']}@gmail.com";
+
             $patientArray = Arr::only($input, ['patient_unique_id']);
             $input['type'] = User::PATIENT;
 
-            $input['password'] = Hash::make($input['password']);
+            $input['password'] = Hash::make('12345678');
             $user = User::create($input);
 
             $patient = $user->patient()->create($patientArray);

@@ -19,6 +19,7 @@ require __DIR__.'/vendor/autoload.php';
 
 $app = require_once __DIR__.'/bootstrap/app.php';
 
+
 /*
 |--------------------------------------------------------------------------
 | Run The Artisan Application
@@ -29,6 +30,7 @@ $app = require_once __DIR__.'/bootstrap/app.php';
 | or another output device for the developers. Here goes nothing!
 |
 */
+
 
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 

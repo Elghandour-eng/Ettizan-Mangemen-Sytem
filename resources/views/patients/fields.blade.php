@@ -1,23 +1,28 @@
     <div class="row">
-    <div class="col-md-6 mb-5">
-        {{ Form::label('firstName',__('messages.patient.first_name').':' ,['class' => 'form-label required']) }}
-        {{ Form::text('first_name',!empty($patient->user) ? $patient->user->first_name : null,['class' => 'form-control','placeholder' => __('messages.patient.first_name'),'required']) }}
-    </div>
+        <div class="col-md-6 mb-5">
+            {{ Form::label('firstName',__('messages.patient.first_name').':' ,['class' => 'form-label required']) }}
+            {{ Form::text('first_name',!empty($patient->user) ? $patient->user->first_name : null,['class' => 'form-control','placeholder' => __('messages.patient.first_name'),'required']) }}
+        </div>
     <div class="col-md-6 mb-5">
         {{ Form::label('lastName',__('messages.patient.last_name').':' ,['class' => 'form-label required']) }}
         {{ Form::text('last_name',!empty($patient->user) ? $patient->user->last_name : null,['class' => 'form-control','placeholder' => __('messages.patient.last_name'),'required']) }}
     </div>
     <div class="col-md-6 mb-5">
         {{ Form::label('patientUniqueId',__('messages.patient.patient_unique_id').':' ,['class' => 'form-label required']) }}
-        {{ Form::text('patient_unique_id',isset($data['patientUniqueId']) ? $data['patientUniqueId'] : null,['class' => 'form-control','required','maxLength' => '8','readonly']) }}
+        {{ Form::text('patient_unique_id',isset($data['patientUniqueId']) ? $data['patientUniqueId'] : null,['class' => 'form-control','required']) }}
     </div>
-    <div class="col-md-6 mb-5">
+
+    {{-- <div class="col-md-6 mb-5">
         {{ Form::label('email',__('messages.patient.email').':' ,['class' => 'form-label ']) }}
         {{ Form::email('email',!empty($patient->user) ? $patient->user->email : null,['class' => 'form-control','placeholder' => __('messages.patient.email')]) }}
-    </div>
-    @if(empty($patient))
+    </div> --}}
+
+
+
+    {{-- @if(empty($patient))
         <div class="col-md-6 mb-5">
             <div class="mb-1">
+
                 {{ Form::label('password',__('messages.patient.password').':' ,['class' => 'form-label ']) }}
                 <span data-bs-toggle="tooltip" title="{{ __('messages.flash.user_8_or') }}">
                 <i class="fa fa-question-circle"></i></span>
@@ -39,11 +44,17 @@
                     </div>
                 </div>
         </div>
-    @endif
+    @endif --}}
+
+
+
     <div class="col-md-6 mb-5">
         {{ Form::label('contact', __('messages.patient.contact_no').':', ['class' => 'form-label']) }}
+
         {{ Form::tel('contact', !empty($patient->user) ? '+'.$patient->user->region_code.$patient->user->contact : null, ['class' => 'form-control',
             'placeholder' => __('messages.patient.contact_no'),'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")','id'=>'phoneNumber']) }}
+
+
         {{ Form::hidden('region_code',!empty($patient->user) ? $patient->user->region_code : null,['id'=>'prefix_code']) }}
         <span id="valid-msg" class="text-success d-none fw-400 fs-small mt-2">{{ __('messages.valid_number') }}</span>
         <span id="error-msg" class="text-danger d-none fw-400 fs-small mt-2">{{ __('messages.invalid_number') }}</span>
@@ -123,3 +134,8 @@
            class="btn btn-secondary">{{__('messages.common.discard')}}</a>
     </div>
 </div>
+
+
+
+
+
